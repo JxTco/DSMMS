@@ -1,0 +1,269 @@
+/* 料件管理系統 - 桌面高密度大表格與樹狀目錄樣式 */
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* 滾動條美化 */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* 樹狀分類選單樣式 (Tree View) */
+.tree-node-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  font-size: 12.5px;
+}
+
+.tree-node-row:hover {
+  background-color: #f1f5f9;
+}
+
+.tree-node-row.active-node {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 600;
+  border-left: 3px solid #2563eb;
+}
+
+.tree-toggle-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  transition: transform 0.2s ease;
+  color: #64748b;
+  font-size: 10px;
+}
+
+.tree-toggle-arrow:hover {
+  background-color: #e2e8f0;
+  color: #0f172a;
+}
+
+.tree-toggle-arrow.open {
+  transform: rotate(90deg);
+}
+
+.tree-node-actions {
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+
+.tree-node-row:hover .tree-node-actions {
+  display: flex;
+}
+
+.tree-action-btn {
+  padding: 1px 4px;
+  font-size: 11px;
+  border-radius: 4px;
+  color: #64748b;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.tree-action-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+/* 標籤徽章 */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1.5px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.badge-crystals {
+  background-color: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.badge-resistors {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.badge-inductors {
+  background-color: #ecfeff;
+  color: #0e7490;
+  border: 1px solid #a5f3fc;
+}
+
+.badge-product {
+  background-color: #faf5ff;
+  color: #7e22ce;
+  border: 1px solid #e9d5ff;
+}
+
+.badge-warn {
+  background-color: #fffbeb;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+/* 高密度資料表格 (Excel 規格風) */
+.parts-table-wrap {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.parts-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.parts-table th {
+  background-color: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-bottom: 2px solid #cbd5e1;
+  border-right: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  user-select: none;
+}
+
+.parts-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid #f1f5f9;
+  border-right: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.parts-table tbody tr:hover td {
+  background-color: #f8fafc;
+}
+
+.parts-table tbody tr.row-low-stock td {
+  background-color: #fffdf5;
+}
+
+.parts-table tbody tr.row-low-stock:hover td {
+  background-color: #fffbeb;
+}
+
+/* 凍結前兩欄 (Group, Item) */
+.sticky-col-1 {
+  position: sticky;
+  left: 0;
+  z-index: 10;
+  background-color: inherit;
+}
+th.sticky-col-1 {
+  z-index: 30;
+  background-color: #f8fafc;
+}
+
+.sticky-col-2 {
+  position: sticky;
+  left: 55px;
+  z-index: 10;
+  background-color: inherit;
+}
+th.sticky-col-2 {
+  z-index: 30;
+  background-color: #f8fafc;
+}
+
+/* 彈窗樣式 */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+  width: 95%;
+  max-width: 680px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  transform: scale(0.97);
+  transition: transform 0.2s ease;
+  overflow: hidden;
+}
+
+.modal-backdrop.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-body {
+  overflow-y: auto;
+  padding: 20px;
+}
